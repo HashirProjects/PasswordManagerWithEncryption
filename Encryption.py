@@ -35,7 +35,7 @@ class Password():
 
 		self.uncyphered=passList
 
-	def Cypher(self):#UNF
+	def Cypher(self):
 
 		step=[]
 		for i in range(self.Chars):
@@ -69,7 +69,7 @@ class Password():
 		self.step=step
 		self.cyphered=cyphered
 
-	def CountElements(self):#UNF
+	def CountElements(self):
 		#count the number of caps chars numbers and symbols
 
 		registered= False
