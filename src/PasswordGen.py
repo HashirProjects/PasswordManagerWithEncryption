@@ -101,6 +101,7 @@ class Password():
 						print('symbol counted')
 
 
+
 	def deCypher(self):
 		#minus the key from the cyphered password  to get the uncyphered password.
 		decrypted=[]
@@ -124,21 +125,3 @@ class Password():
 
 
 		self.uncyphered=decrypted
-
-CapitalLetters= 1
-Letters= 3
-Numbers= 2
-Symbols= 1
-UserPassword=Password(capitalChars=CapitalLetters,Chars=Letters,Numbers=Numbers,Symbols=Symbols)
-print(UserPassword.charsUpper)
-UserPassword.generate()
-print(UserPassword.uncyphered)
-UserPassword.Cypher()
-print(UserPassword.cyphered)
-UserPassword.deCypher()
-print(UserPassword.uncyphered)
-
-newPassword=Password(cyphered=['T', 'o', 'r', 1, 1, "_"])
-print(newPassword.cyphered)
-newPassword.CountElements()
-print([newPassword.Chars,newPassword.capitalChars,newPassword.Numbers,newPassword.Symbols])
