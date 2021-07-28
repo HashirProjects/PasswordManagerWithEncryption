@@ -9,10 +9,10 @@ class Password():
 
 	def __init__(self, capitalChars =0, Chars=0, Numbers=0, Symbols=0, uncyphered=[], cyphered=[], step=[]):
 
-		self.capitalChars=capitalChars
-		self.Chars=Chars
-		self.Numbers=Numbers
-		self.Symbols=Symbols
+		self.capitalChars=int(capitalChars)
+		self.Chars=int(Chars)
+		self.Numbers=int(Numbers)
+		self.Symbols=int(Symbols)
 		self.uncyphered=uncyphered
 		self.cyphered=cyphered
 		self.step=step

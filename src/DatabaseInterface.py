@@ -22,14 +22,16 @@ class databaseInteraction():
 		try:
 			self.cursor.execute('INSERT INTO PasswordForService (service,password,encrypted) VALUES (%s,%s,%s)',(self.service,self.password,self.encrypted))
 		except:
-			self.cursor.execute('DELETE FROM PasswordForService WHERE service= %s', (self.service))
+			self.cursor.execute('DELETE FROM PasswordForService WHERE service= %s', (self.service,))
 			self.cursor.execute('INSERT INTO PasswordForService (service,password,encrypted) VALUES (%s,%s,%s)',(self.service,self.password,self.encrypted))
 		self.db.commit()
 
 	def loadPassword(self):
-		self.cursor.execute('SELECT password FROM PasswordForService WHERE service = %s', (self.service))
-		return self.cursor[1]
+		self.cursor.execute('SELECT password FROM PasswordForService WHERE service = %s', (self.service,))
+		for x in self.cursor:
+			return x[0]
 
 	def loadCyphered(self):
-		self.cursor.execute('SELECT cyphered FROM PasswordForService WHERE service = %s', (self.service))
-		return self.cursor[1]
+		self.cursor.execute('SELECT encrypted FROM PasswordForService WHERE service = %s', (self.service,))
+		for x in self.cursor:
+			return x[0]

@@ -18,52 +18,58 @@ def generatePasswordObject(mode, CapitalLetters = 0, Letters = 0, Numbers = 0, S
 
 	return UserPassword
 
+def ListToString(userlist):
+
+	string=""
+	for char in userlist:
+		string+=str(char)
+
+	return string
+
 def main():
 
 	while True:
-		user=input("enter your database username: ")
+		user=input("\nenter your database username: ")
 		masterPassword=input("enter your database password: ")
 
 		try:
 			cursor=databaseInteraction(user, masterPassword)
 			break
 		except:
-			print("those details were incorrect, please try again\n")
+			print("\nthose details were incorrect, please try again")
 
 	while True:
 
-		choice1=input('\npress [A] to generate password \npress [S] to decypher a previous password (make sure you have your key) \npress [D] to load a saved password \npress [F] to Quit \n')
-		if choice1== 'F':
-			break
-
-		service= input('enter the service which the password is for: ')
+		service= input('\nenter the service which the password is for: ')
 		cursor.service=service
 
+		choice1=input('\npress [A] to generate password \npress [S] to decypher a previous password (make sure you have your key) \npress [D] to load a saved password \n')
+		
 		if choice1== 'A':
 			userPassword= generatePasswordObject(choice1)
 			userPassword.generate()
 			run=True
-			output=''.join(userPassword.uncyphered)#turns the list into a string (not neccecary but easier to look at)
-			print(f'your password is: {output}')
+			output=ListToString(userPassword.uncyphered)#turns the list into a string (not neccecary but easier to look at)
+			print(f'\nyour password is: {output}')
 
 			while run:
-				choice2=input('press [A] to cypher password and save \npress [S] to save as is \npress [D] if you do not want to save this password \n')
+				choice2=input('\npress [A] to cypher password and save \npress [S] to save as is \npress [D] if you do not want to save this password \n')
 				if choice2 == 'A':
 
-					userPassword.cypher()
-					key=''.join(userPassword.step)
-					print(f'your key is {key}. please note this down ,as you will need it to access your password again')
-					cursor.encrypted=''.join(userPassword.cyphered) #creates a string from the list 
+					userPassword.Cypher()
+					key=ListToString(userPassword.step)
+					print(f'\nyour key is {key}. please note this down ,as you will need it to access your password again')
+					cursor.encrypted=ListToString(userPassword.cyphered) #creates a string from the list 
 					cursor.save()
-					print('your password has been saved')
+					print('\nyour password has been saved')
 
 					run=False
 
 				elif choice2== 'S':
 
-					cursor.password = ''.join(userPassword.uncyphered)
+					cursor.password = ListToString(userPassword.uncyphered)
 					cursor.save()
-					print('your password has been saved')
+					print('\nyour password has been saved')
 
 					run=False
 
@@ -77,15 +83,25 @@ def main():
 			userPassword=Password(cyphered=list(cursor.loadCyphered()))
 			userPassword.CountElements()
 
-			key=input('enter your key :')
+			key=input('\nenter your key :')
 			userPassword.step=list(key)
 			userPassword.deCypher()
-			output= ''.join(userPassword.uncyphered)
-			print(f'your password is: {output}')
+			output= ListToString(userPassword.uncyphered)
+			print(f'\nyour password is: {output}')
 
 		elif choice1== 'D':
-			
+
 			print(f'your password is: {cursor.loadPassword()}')
+
+		else:
+
+			print("that input was invalid.\n")
+
+		again = input("\nWould you like to go again?(type N to Quit ,or any other key to continue)\n")
+
+		if again == "N":
+			break
+
 
 		# if statement for each choice: generate password gives option to save as is or cypher then save or dont save, decypher breaks loop
 

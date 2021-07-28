@@ -27,10 +27,11 @@ def main(user,masterPassword):
 		cursor.execute('INSERT INTO PasswordForService (service,password,encrypted) VALUES (%s,%s,%s)',(testText,testText,testText))
 		#use db.commit() after you make a change to your database if you want it to save!
 
-		cursor.execute('SELECT * FROM PasswordForService')
+		cursor.execute('SELECT password FROM PasswordForService WHERE service = %s', ("google",))
 
 		for x in cursor:
 			print(x)
+		print(cursor)
 
 	test()
 
