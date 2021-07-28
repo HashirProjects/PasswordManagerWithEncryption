@@ -78,27 +78,23 @@ class Password():
 				if letter == j:
 					self.capitalChars+=1
 					registered = True
-					print('capital char counted')
 
 			if not registered:
 				for j in self.charsLower:
 					if letter == j:
 						self.Chars+=1
 						registered= True
-						print('char counted')
 
 			if not registered:
 				for j in range(9):
 					if letter == j:
 						self.Numbers+=1
 						registered= True
-						print('int counted')
 
 			if not registered:
 				for symbol in self.symbolList:
 					if letter == symbol:
 						self.Symbols+=1
-						print('symbol counted')
 
 
 

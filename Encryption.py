@@ -135,6 +135,7 @@ UserPassword.generate()
 print(UserPassword.uncyphered)
 UserPassword.Cypher()
 print(UserPassword.cyphered)
+print(UserPassword.step)
 UserPassword.deCypher()
 print(UserPassword.uncyphered)
 

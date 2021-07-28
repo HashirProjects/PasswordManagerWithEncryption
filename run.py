@@ -18,11 +18,11 @@ def generatePasswordObject(mode, CapitalLetters = 0, Letters = 0, Numbers = 0, S
 
 	return UserPassword
 
-def ListToString(userlist):
+def ListToString(userlist, delimiter =""):
 
 	string=""
 	for char in userlist:
-		string+=str(char)
+		string+=str(char)+delimiter
 
 	return string
 
@@ -57,7 +57,7 @@ def main():
 				if choice2 == 'A':
 
 					userPassword.Cypher()
-					key=ListToString(userPassword.step)
+					key=ListToString(userPassword.step, delimiter = ",")
 					print(f'\nyour key is {key}. please note this down ,as you will need it to access your password again')
 					cursor.encrypted=ListToString(userPassword.cyphered) #creates a string from the list 
 					cursor.save()
@@ -84,7 +84,7 @@ def main():
 			userPassword.CountElements()
 
 			key=input('\nenter your key :')
-			userPassword.step=list(key)
+			userPassword.step=list(f"[{key}]")
 			userPassword.deCypher()
 			output= ListToString(userPassword.uncyphered)
 			print(f'\nyour password is: {output}')
